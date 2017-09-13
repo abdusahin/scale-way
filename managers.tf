@@ -22,6 +22,7 @@ resource "scaleway_server" "swarm_manager" {
       "mkdir -p /var/iot/haproxy",
       "mkdir -p /var/iot/mqtt_data",
       "mkdir -p /var/iot/mqtt_log",
+      "mkdir -p /var/iot/mqtt_config",
       
     ]
   }
