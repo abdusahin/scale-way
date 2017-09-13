@@ -33,6 +33,26 @@ resource "scaleway_security_group_rule" "https_accept" {
   port      = 443
 }
 
+resource "scaleway_security_group_rule" "mqtt_accept" {
+  security_group = "${scaleway_security_group.swarm_managers.id}"
+
+  action    = "accept"
+  direction = "inbound"
+  ip_range  = "0.0.0.0/0"
+  protocol  = "TCP"
+  port      = 1883
+}
+
+resource "scaleway_security_group_rule" "kafka_mgm_accept" {
+  security_group = "${scaleway_security_group.swarm_managers.id}"
+
+  action    = "accept"
+  direction = "inbound"
+  ip_range  = "0.0.0.0/0"
+  protocol  = "TCP"
+  port      = 9000
+}
+
 resource "scaleway_security_group" "swarm_workers" {
   name        = "swarm_workers"
   description = "Allow SSH traffic"

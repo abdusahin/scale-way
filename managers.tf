@@ -19,12 +19,21 @@ resource "scaleway_server" "swarm_manager" {
   provisioner "remote-exec" {
     inline = [
       "mkdir -p /etc/systemd/system/docker.service.d",
+      "mkdir -p /var/iot/haproxy",
+      "mkdir -p /var/iot/mqtt_data",
+      "mkdir -p /var/iot/mqtt_log",
+      
     ]
   }
 
   provisioner "file" {
     content     = "${data.template_file.docker_conf.rendered}"
     destination = "/etc/systemd/system/docker.service.d/docker.conf"
+  }
+
+  provisioner "file" {
+    content     = "haproxy/haproxy.cfg"
+    destination = "/var/iot/haproxy/haproxy.cfg"
   }
 
   provisioner "file" {

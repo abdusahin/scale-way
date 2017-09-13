@@ -19,6 +19,8 @@ resource "scaleway_server" "swarm_worker" {
   provisioner "remote-exec" {
     inline = [
       "mkdir -p /etc/systemd/system/docker.service.d",
+      "mkdir -p /var/iot/kafka_data",
+      "mkdir -p /var/iot/cassandra_data",
     ]
   }
 
