@@ -21,12 +21,18 @@ resource "scaleway_server" "swarm_worker" {
       "mkdir -p /etc/systemd/system/docker.service.d",
       "mkdir -p /var/iot/kafka_data",
       "mkdir -p /var/iot/cassandra_data",
+      "mkdir -p /var/iot/cassandra_config",
     ]
   }
 
   provisioner "file" {
     content     = "${data.template_file.docker_conf.rendered}"
     destination = "/etc/systemd/system/docker.service.d/docker.conf"
+  }
+
+  provisioner "file" {
+    content     = "cassandra/"
+    destination = "/var/iot/cassandra_config"
   }
 
   provisioner "file" {

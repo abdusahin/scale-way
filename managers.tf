@@ -22,6 +22,10 @@ resource "scaleway_server" "swarm_manager" {
       "mkdir -p /var/iot/haproxy",
       "mkdir -p /var/iot/mqtt_data",
       "mkdir -p /var/iot/mqtt_log",
+      "mkdir -p /var/iot/mqtt_config",
+      "mkdir -p /var/iot/cassandra_data",
+      "mkdir -p /var/iot/cassandra_config",
+      
       
     ]
   }
@@ -31,10 +35,22 @@ resource "scaleway_server" "swarm_manager" {
     destination = "/etc/systemd/system/docker.service.d/docker.conf"
   }
 
+    provisioner "file" {
+    content     = "mqtt/"
+    destination = "/var/iot/mqtt_config"
+  }
+
+
   provisioner "file" {
     content     = "haproxy/haproxy.cfg"
     destination = "/var/iot/haproxy/haproxy.cfg"
   }
+
+  provisioner "file" {
+    content     = "cassandra/"
+    destination = "/var/iot/cassandra_config"
+  }
+
 
   provisioner "file" {
     source      = "scripts/install-docker-ce.sh"
