@@ -25,8 +25,6 @@ resource "scaleway_server" "swarm_manager" {
       "mkdir -p /var/iot/mqtt_config",
       "mkdir -p /var/iot/cassandra_data",
       "mkdir -p /var/iot/cassandra_config",
-      
-      
     ]
   }
 
